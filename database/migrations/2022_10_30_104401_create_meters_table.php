@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('meters', function (Blueprint $table) {
             $table->id();
             $table->string('mether_type');
-            $table->string('meter_id');
+            $table->string('meter_id')->unique();
             $table->foreignId('area_id')->constrained('areas')->onDelete('cascade');
             $table->foreignId('owner_id')->constrained('owners')->onDelete('cascade');
             $table->string('city');

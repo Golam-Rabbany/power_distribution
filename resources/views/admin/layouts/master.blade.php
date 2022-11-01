@@ -50,10 +50,10 @@
           ">
                 <div class="flex items-center self-stretch px-4 hover:bg-sky-600 peer">
                     <div class="mr-1">
-                        <span>{{ Auth::user()->name }}</span>
+                        <span class="font-semibold">{{ Auth::user()->name }}</span>
                     </div>
                     <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
                             stroke="currentColor" class="mt-1 h-4 w-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                         </svg>

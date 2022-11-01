@@ -11,7 +11,7 @@
               <p>Jhigatola, Dhanmondi, Dhaka</p>
               <p>10-10-22</p>
             </div>
-          </div>
+        </div>
           
           <div class="my-2 inline-block">
             <table class="font-semibold">
@@ -23,10 +23,6 @@
                 <tr>
                   <td class="px-3">Father Name:</td>
                   <td class="px-3">{{$datas->meter_owner->father_name}}</td>
-                </tr>
-                <tr>
-                  <td class="px-3">Email:</td>
-                  <td class="px-3">{{$datas->meter_owner->email}}</td>
                 </tr>
                 <tr>
                   <td class="px-3">Phone:</td>

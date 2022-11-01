@@ -1,28 +1,35 @@
 @extends('admin.layouts.master')
 
+@section('data_table_css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+@endsection
+
 @section('dashboard')
 
 <section class="antialiased bg-gray-100 text-gray-600 h-screen">
     <div class="flex justify-end pt-6 pr-3">
-        <a href="{{route('meter.create')}}"><p class="bg-sky-500 text-white px-3 py-2 font-semibold rounded-lg">Create Area</p></a>
+        <a href="{{route('meter.create')}}"><p class="bg-sky-500 text-white px-3 py-2 font-semibold rounded-lg">Create Meter</p></a>
     </div>
 
     <div class="flex flex-col justify-center">
         <!-- Table -->
         <div class="w-full mt-8 max-w-4xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
             <header class="px-5 py-4 border-b border-gray-100">
-                <h2 class="font-semibold text-gray-800">Customers</h2>
+                <h2 class="font-semibold text-gray-800">Meter</h2>
             </header>
             <div class="p-3">
                 <div class="overflow-x-auto">
-                    <table class="table-auto w-full">
+                    <table id="data_table" class="table-auto w-full">
                         <thead class=" font-semibold uppercase text-gray-400 bg-gray-50">
                             <tr>
                                 <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Meter Id</div>
+                                    <div class="font-semibold text-left">Meter Code</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">Meter Type</div>
+                                </th>
+                                <th class="p-2 whitespace-nowrap">
+                                    <div class="font-semibold text-left">Use Unit</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">View</div>
@@ -41,6 +48,9 @@
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left font-medium text-green-500">{{$data->mether_type}}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left font-medium text-green-500">{{$data->use_unit}}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left font-medium text-green-500">
@@ -74,5 +84,17 @@
         </div>
     </div>
 </section>
+
+
+@section('data_table_js')
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#data_table').DataTable();
+    });
+</script>
+@endsection
 
 @endsection

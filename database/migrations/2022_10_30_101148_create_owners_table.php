@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('owners', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('area_id')->constrained('areas')->onDelete('cascade');
             $table->string('owner_name');
             $table->string('father_name');
-            $table->bigInteger('nid');
-            $table->integer('phone');
+            $table->bigInteger('nid')->unique();
+            $table->integer('phone')->unique();
             $table->string('city');
             $table->string('area');
             $table->string('flat');

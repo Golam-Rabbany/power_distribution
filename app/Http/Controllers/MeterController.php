@@ -32,7 +32,7 @@ class MeterController extends Controller
 
         $this->validate($request, [
             'mether_type' => 'required',
-            'meter_id' => 'required',
+            'meter_id' => 'required|unique:meters,meter_id,',
             'city' => 'required',
             'area' => 'required',
             'flat' => 'required',
@@ -59,8 +59,8 @@ class MeterController extends Controller
     {
         // $owners = Meter::->where('id', $id)->get();
          $data = Meter::with(['meter_area','meter_owner'])->where('id', $id)->first();
-
-        return view('admin.meter.owner_show',compact('data'));
+         $readings = Meter::with(['meter_reading','meter_owner'])->where('id', $id)->first();
+        return view('admin.meter.owner_show',compact('data','readings'));
     }
 
     public function edit($id)
@@ -76,5 +76,9 @@ class MeterController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getAreaOwnerSection($id){
+        return Owner::where('area_id', $id)->get();
     }
 }

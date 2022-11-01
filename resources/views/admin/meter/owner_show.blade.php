@@ -3,8 +3,58 @@
 @section('dashboard')
 
 <section class="antialiased bg-gray-100 text-gray-600 h-screen">
-    <div class="flex justify-end pt-6 pr-3">
+    <div class="flex justify-end pt-4 pr-3">
         <a href=""><p class="bg-sky-500 text-white px-3 py-2 font-semibold rounded-lg">Create Area</p></a>
+    </div>
+
+    <div class="flex justify-between mt-10">
+        
+          <div class="my-2 inline-block">
+            <table class="font-semibold">
+              <tbody class="">
+                <tr>
+                  <td class="px-3">Name:</td>
+                  <td class="px-3">{{$data->meter_owner->owner_name}}</td> 
+                </tr>
+                <tr>
+                  <td class="px-3">Father Name:</td>
+                  <td class="px-3">{{$data->meter_owner->father_name}}</td>
+                </tr>
+                <tr>
+                  <td class="px-3">Phone:</td>
+                  <td class="px-3">0{{$data->meter_owner->phone}}</td>
+                </tr>
+                <tr>
+                  <td class="px-3">NID:</td>
+                  <td class="px-3">{{$data->meter_owner->nid}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="my-2 inline-block">
+            <table class="font-semibold">
+              <tbody class="">
+                <tr>
+                  <td class="px-3">City :</td>
+                  <td class="px-3">{{$data->meter_owner->city}}</td> 
+                </tr>
+                <tr>
+                  <td class="px-3">Area :</td>
+                  <td class="px-3">{{$data->meter_owner->area}}</td>
+                </tr>
+                <tr>
+                  <td class="px-3">Flat No :</td>
+                  <td class="px-3">{{$data->meter_owner->flat}}</td>
+                </tr>
+                <tr>
+                  <td class="px-3">Post Code :</td>
+                  <td class="px-3">{{$data->meter_owner->post_code}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
     </div>
 
     <div class="flex flex-col justify-center">
@@ -19,61 +69,30 @@
                         <thead class=" font-semibold uppercase text-gray-400 bg-gray-50">
                             <tr>
                                 <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Meter User</div>
+                                    <div class="font-semibold text-left">Date</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Father Name</div>
+                                    <div class="font-semibold text-left">Unit</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">NID</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Phone</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">City</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Area</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Flat</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Post Code</div>
+                                    <div class="font-semibold text-left">Created At</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">Edit / Delete</div>
                                 </th>
-                                
                             </tr>
                         </thead>
                         <tbody class="text-sm divide-y divide-gray-100">
-    
+                            @foreach ($readings->meter_reading as $data)
                                 <tr>
                                     <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left">{{$data->meter_owner->owner_name}}</div>
+                                        <div class="text-left">{{$data->date??''}}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left font-medium text-green-500">{{$data->meter_owner->father_name}}</div>
+                                        <div class="text-left font-medium text-green-500">{{$data->unit??''}}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left font-medium text-green-500">{{$data->meter_owner->nid}}</div>
-                                    </td>
-                                    <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left font-medium text-green-500">{{$data->meter_owner->phone}}</div>
-                                    </td>
-                                    <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left font-medium text-green-500">{{$data->meter_owner->city}}</div>
-                                    </td>
-                                    <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left font-medium text-green-500">{{$data->meter_owner->area}}</div>
-                                    </td>
-                                    <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left font-medium text-green-500">{{$data->meter_owner->flat}}</div>
-                                    </td>
-                                    <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left font-medium text-green-500">{{$data->meter_owner->post_code}}</div>
+                                        <div class="text-left font-medium text-green-500">{{$data->created_at??''}}</div>
                                     </td>
                                     
                                     <td class="p-2 whitespace-nowrap">
@@ -90,7 +109,7 @@
                                         </a></div>
                                     </td>
                                 </tr>
-                     
+                     @endforeach
                         </tbody>
                     </table>
                 </div>

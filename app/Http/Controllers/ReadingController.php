@@ -21,7 +21,7 @@ class ReadingController extends Controller
     public function create()
     {
         $areas = Area::all();
-         $meters = Meter::all();
+        $meters = Meter::all();
         return view('admin.reading.create',compact('meters','areas'));
     }
 
@@ -32,7 +32,7 @@ class ReadingController extends Controller
             'date' => 'required',
             
         ]);
-
+   $lastreading = Reading::where('meter_id', $request->meter_id)->latest()->orderBy('id','DESC')->value('unit');
 
         $data = new Reading();
         $data->area_id = $request->area_id;
@@ -40,6 +40,12 @@ class ReadingController extends Controller
         $data->unit = $request->unit;
         $data->date = $request->date;
         $data->save();
+       
+        $meater= Meter::find($request->meter_id);
+       $meater->use_unit = $request->unit - $lastreading;
+       $meater->update();
+
+
         return back()->with('success', 'Added Successfully');
     }
 
