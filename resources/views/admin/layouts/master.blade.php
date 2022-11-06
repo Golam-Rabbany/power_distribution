@@ -66,17 +66,17 @@
               hidden
               w-48
               rounded-b
-              bg-gray-300
+              bg-sky-700
               text-blue-400
               hover:block
               peer-hover:block
             ">
-                    <a class="block p-2 font-semibold hover:bg-slate-100" href="#">Profile</a>
+                    <a class="block p-2 font-semibold hover:bg-gray-700" href="#">Profile</a>
                     <div class="w-full border-t"></div>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
-                        <x-dropdown-link :href="route('logout')" class="font-semibold text-red-500"
+                        <x-dropdown-link :href="route('logout')" class=" font-bold text-red-500"
                             onclick="event.preventDefault();
                                   this.closest('form').submit();">
                             {{ __('Log Out') }}
@@ -130,27 +130,74 @@
                         <span>Owner</span>
                     </a>
                 </div>
-                <div class="w-full font-semibold">
-                    <a href="{{route('meter.index')}}" class="flex items-center p-[.7rem] hover:text-sky-500">
+                <div class="w-full font-semibold" x-data="{ submenuOpen: false }" x-on:active="submenuOpen = true"
+                    x-on:click.outside="submenuOpen = false">
+                    <a href="#" x-on:click.prevent="submenuOpen = !submenuOpen"
+                        class="flex w-full items-center p-[.7rem] hover:text-sky-500">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                             class="mr-1 h-5 w-5">
                             <path fill-rule="evenodd"
                                 d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <span>Meter</span>
+                        <div class="flex-grow">Meter</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                            class="h-5 w-5 transition-[transform]" x-bind:class="submenuOpen ? 'rotate-90' : ''">
+                            <path fill-rule="evenodd"
+                                d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                                clip-rule="evenodd" />
+                        </svg>
                     </a>
+                    <div class="w-full overflow-hidden bg-sky-600" x-bind:class="submenuOpen ? 'h-auto' : 'h-0'">
+                        <a href="{{route('meter.index')}}" class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-300"> View Meter</a>
+                        <a href="{{route('meter.create')}}" class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-300">Create Meter</a>
+                    </div>
                 </div>
-                <div class="w-full font-semibold">
-                    <a href="{{route('reading.index')}}" class="flex items-center p-[.7rem] hover:text-sky-500">
+                <div class="w-full font-semibold" x-data="{ submenuOpen: false }" x-on:active="submenuOpen = true"
+                    x-on:click.outside="submenuOpen = false">
+                    <a href="#" x-on:click.prevent="submenuOpen = !submenuOpen"
+                        class="flex w-full items-center p-[.7rem] hover:text-sky-500">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                             class="mr-1 h-5 w-5">
                             <path fill-rule="evenodd"
                                 d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <span>Reading</span>
+                        <div class="flex-grow">Reading</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                            class="h-5 w-5 transition-[transform]" x-bind:class="submenuOpen ? 'rotate-90' : ''">
+                            <path fill-rule="evenodd"
+                                d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                                clip-rule="evenodd" />
+                        </svg>
                     </a>
+                    <div class="w-full overflow-hidden bg-sky-600" x-bind:class="submenuOpen ? 'h-auto' : 'h-0'">
+                        <a href="{{route('reading.index')}}" class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-300"> View Reading</a>
+                        <a href="{{route('reading.create')}}" class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-300">Create Reading</a>
+                    </div>
+                </div>
+                <div class="w-full font-semibold" x-data="{ submenuOpen: false }" x-on:active="submenuOpen = true"
+                    x-on:click.outside="submenuOpen = false">
+                    <a href="#" x-on:click.prevent="submenuOpen = !submenuOpen"
+                        class="flex w-full items-center p-[.7rem] hover:text-sky-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                            class="mr-1 h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <div class="flex-grow">Billing</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                            class="h-5 w-5 transition-[transform]" x-bind:class="submenuOpen ? 'rotate-90' : ''">
+                            <path fill-rule="evenodd"
+                                d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <div class="w-full overflow-hidden bg-sky-600" x-bind:class="submenuOpen ? 'h-auto' : 'h-0'">
+                        <a href="{{route('bill.create')}}" class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-300">Generate Bill</a>
+                        <a href="{{route('bill.index')}}" class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-300">View Bill</a>
+                    </div>
                 </div>
                 <div class="w-full font-semibold" x-data="{ submenuOpen: false }" x-on:active="submenuOpen = true"
                     x-on:click.outside="submenuOpen = false">
@@ -170,10 +217,10 @@
                                 clip-rule="evenodd" />
                         </svg>
                     </a>
-                    <div class="w-full overflow-hidden bg-gray-100" x-bind:class="submenuOpen ? 'h-auto' : 'h-0'">
-                        <a class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-500">Submenu 1</a>
-                        <a class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-500">Submenu 2</a>
-                        <a class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-500">Submenu 3</a>
+                    <div class="w-full overflow-hidden bg-sky-600" x-bind:class="submenuOpen ? 'h-auto' : 'h-0'">
+                        <a class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-300">Submenu 1</a>
+                        <a class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-300">Submenu 2</a>
+                        <a class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-300">Submenu 3</a>
                     </div>
                 </div>
 

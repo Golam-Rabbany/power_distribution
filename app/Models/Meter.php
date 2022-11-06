@@ -18,8 +18,13 @@ class Meter extends Model
     }
 
     public function meter_reading(){
-        return $this->hasMany(Reading::class, 'meter_id', 'id');
+        return $this->hasMany(Reading::class, 'id', 'meter_id');
     }
+
+    public function bill_meter(){
+        return $this->hasMany(Bill::class, 'meter_id', 'id');
+    }
+   
 
 
 }

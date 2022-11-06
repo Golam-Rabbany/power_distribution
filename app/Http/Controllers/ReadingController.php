@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
+use App\Models\Bill;
 use App\Models\Meter;
 use App\Models\Reading;
 use Illuminate\Http\Request;
@@ -27,31 +28,66 @@ class ReadingController extends Controller
 
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'unit' => 'required',
             'date' => 'required',
-            
         ]);
-   $lastreading = Reading::where('meter_id', $request->meter_id)->latest()->orderBy('id','DESC')->value('unit');
+
+        $last_reading = Reading::where('meter_id', $request->meter_id)->latest()->orderBy('id','DESC')->value('unit');
 
         $data = new Reading();
         $data->area_id = $request->area_id;
         $data->meter_id = $request->meter_id;
+        $data->bill_id = $request->meter_id;
         $data->unit = $request->unit;
         $data->date = $request->date;
+       
         $data->save();
        
-        $meater= Meter::find($request->meter_id);
-       $meater->use_unit = $request->unit - $lastreading;
-       $meater->update();
+       $meter= Meter::find($request->meter_id);
 
+       $meter->use_unit = $request->unit - $last_reading;
+       $meter->update();
+
+       if ($meter->use_unit >0 && $meter->use_unit <= 300 ){
+            $unit_price = $meter->use_unit * 5.70;
+       }elseif ($meter->use_unit >=301 && $meter->use_unit <= 700){
+            $unit_price =$meter->use_unit * 8.35;
+        }elseif ($meter->use_unit >=701 && $meter->use_unit <= 20000){
+            $unit_price =$meter->use_unit * 15.10;
+        }
+        else{
+            $unit_price =$meter->use_unit * 0;
+        }
+
+        
+        if ($meter->mether_type == 'personal'){
+            $vat = $unit_price * 1.22 / 100;
+        }elseif ($meter->mether_type == 'business'){
+            $vat = $unit_price * 3.40 / 100;
+        }elseif ($meter->mether_type == 'industrial'){
+            $vat = $unit_price * 5.10 /100;
+        }else{
+            $vat = $unit_price * 0;
+        }
+
+
+        $bills =Bill::find($request->meter_id);
+    
+        $bills->usage_unit = $request->unit - $last_reading;
+        $bills->gross_total = $unit_price;
+        $bills->vat = $vat;
+        $bills->net_total = $unit_price + $vat;
+
+        $bills->save();
 
         return back()->with('success', 'Added Successfully');
     }
 
     public function show($id)
     {
-        $datas = Meter::with(['meter_reading','meter_owner'])->where('id', $id)->first();
+         $datas = Reading::with('meter_reading')->where('meter_id', $id)->get();
         return view('admin.reading.show',compact('datas'));
     }
 
@@ -73,4 +109,6 @@ class ReadingController extends Controller
     public function getAreaMeterSection($id){
         return Meter::where('area_id', $id)->get();
     }
+
+    
 }

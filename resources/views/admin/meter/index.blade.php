@@ -23,6 +23,9 @@
                         <thead class=" font-semibold uppercase text-gray-400 bg-gray-50">
                             <tr>
                                 <th class="p-2 whitespace-nowrap">
+                                    <div class="font-semibold text-left">#</div>
+                                </th>
+                                <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">Meter Code</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
@@ -34,6 +37,7 @@
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">View</div>
                                 </th>
+                                
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">Edit / Delete</div>
                                 </th>
@@ -44,6 +48,9 @@
                             @foreach ($meters as $data)
                                 <tr>
                                     <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left">{{$loop->index+1}}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
                                         <div class="text-left">{{$data->meter_id}}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
@@ -52,6 +59,7 @@
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left font-medium text-green-500">{{$data->use_unit}}</div>
                                     </td>
+                                    
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left font-medium text-green-500">
                                             <a href="{{route('meter.show',$data->id)}}">
@@ -62,6 +70,7 @@
                                             </a>
                                         </div>
                                     </td>
+                                    
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left flex font-medium text-green-500"><a href="">
                                             <div class="flex">

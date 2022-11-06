@@ -14,7 +14,7 @@
         </div>
           
           <div class="my-2 inline-block">
-            <table class="font-semibold">
+            {{-- <table class="font-semibold">
               <tbody class="">
                 <tr>
                   <td class="px-3">Name:</td>
@@ -41,7 +41,7 @@
                   <td class="px-3">{{$datas->meter_owner->post_code}}</td>
                 </tr>
               </tbody>
-            </table>
+            </table> --}}
           </div>
           
     </div>
@@ -74,7 +74,7 @@
                         </thead>
                         <tbody class="text-sm divide-y divide-gray-100">
                            
-                            @foreach ($datas->meter_reading as $data)
+                            @foreach ($datas as $data)
                                 
                                 <tr>
                                     <td class="p-2 whitespace-nowrap">

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('area');
             $table->string('flat');
             $table->string('post_code');
+            $table->integer('use_unit')->default(0);
             $table->timestamps();
         });
     }

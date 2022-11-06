@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\MeterController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ReadingController;
-use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
@@ -21,7 +22,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/owner', OwnerController::class);
     Route::resource('/meter', MeterController::class);
     Route::resource('/reading', ReadingController::class);
-    
+    Route::resource('/bill', BillController::class);
+
+    Route::get('/generate_bill', [BillController::class, 'generate_bill'])->name('generate.bill');
+    Route::get('/paybill', [BillController::class, 'paybill'])->name('paybill');
+    Route::get('/invoice', [BillController::class, 'invoice'])->name('invoice');
     
     Route::get('/getAreaMeterSection/{id}', [ReadingController::class, 'getAreaMeterSection'])->name('getAreaMeterSection');
     Route::get('/getAreaOwnerSection/{id}', [MeterController::class, 'getAreaOwnerSection'])->name('getAreaOwnerSection');

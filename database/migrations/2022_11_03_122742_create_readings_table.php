@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('area_id')->constrained('areas')->onDelete('cascade');
             $table->foreignId('meter_id')->constrained('meters')->onDelete('cascade');
+            $table->foreignId('bill_id')->constrained('bills')->onDelete('cascade');
             $table->integer('unit');
             $table->date('date');
             $table->timestamps();

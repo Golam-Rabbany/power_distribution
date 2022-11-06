@@ -27,7 +27,7 @@
               <label for="meter_id" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Meter Type</label>
           </div>
           <div class="relative z-0 mb-6 w-full group">
-              <input type="text" name="meter_id" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required="">
+              <input type="text" name="meter_id" id="upper" onchange="toUpperCase()" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required="">
               <label for="meter_id" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Meter Id</label>
               @error('meter_id')
                 <div class="text-red-600 text-sm">{{ $message }}</div>
@@ -48,7 +48,7 @@
             <select name="owner_id" id="owner_id" class="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
                 <option value="">---select---</option>
                 @foreach ($owners as $owner)
-                <option value="{{$owner->id}}">{{$owner->owner_name}}</option>
+                <option value="{{$owner->id}}">0{{$owner->phone}}</option>
                 @endforeach
             </select>
               <label for="phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Owner</label>
@@ -117,7 +117,7 @@
                     $("#owner_id").empty();
                     $("#owner_id").append('<option value="">--select--</option>');
                     $.each(data,function(key,value){
-                        $("#owner_id").append('<option value="'+value.id+'">'+value.owner_name+'</option>');
+                        $("#owner_id").append('<option value="'+value.id+'">'+0+value.phone+'</option>');
                     });
                 }else{
                     $("#owner_id").empty();
@@ -125,6 +125,13 @@
             });
         });
     });
+</script>
+
+<script>
+  function toUpperCase(){
+  const uppercase = document.getElementById('upper');
+   uppercase.value = uppercase.value.toUpperCase();
+  }
 </script>
 
 

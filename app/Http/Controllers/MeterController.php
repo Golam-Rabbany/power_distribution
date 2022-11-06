@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
+use Carbon\Carbon;
 use App\Models\Area;
+use App\Models\Bill;
 use App\Models\Meter;
 use App\Models\Owner;
+use App\Models\Reading;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
 use function GuzzleHttp\Promise\all;
 
 class MeterController extends Controller
@@ -29,7 +34,6 @@ class MeterController extends Controller
 
     public function store(Request $request)
     {
-
         $this->validate($request, [
             'mether_type' => 'required',
             'meter_id' => 'required|unique:meters,meter_id,',
@@ -40,18 +44,32 @@ class MeterController extends Controller
             'post_code' => 'required',
         ]);
 
+        try{
+              DB::beginTransaction();
 
-        $data = new Meter();
-        $data->mether_type = $request->mether_type;
-        $data->meter_id = $request->meter_id;
-        $data->area_id = $request->area_id;
-        $data->owner_id = $request->owner_id;
-        $data->city = $request->city;
-        $data->area = $request->area;
-        $data->flat = $request->flat;
-        $data->post_code = $request->post_code;
-        $data->save();
-        return back()->with('success', 'Successfully Done');
+              $data = new Meter();
+              $bills = new Bill();
+              $data->mether_type = $request->mether_type;
+              $data->meter_id = $request->meter_id;
+              $data->area_id = $request->area_id;
+              $data->owner_id = $request->owner_id;
+              $data->city = $request->city;
+              $data->area = $request->area;
+              $data->flat = $request->flat;
+              $data->post_code = $request->post_code;
+              $data->save();
+    
+              
+              $bills->meter_id =$data->id;
+              $bills->save();
+           
+              DB::commit();
+              return back()->with('success', 'Successfully Done');
+
+        }catch(Exception $ex){
+                 DB::rollback();
+                return $ex;
+        }
 
     }
 
@@ -59,7 +77,7 @@ class MeterController extends Controller
     {
         // $owners = Meter::->where('id', $id)->get();
          $data = Meter::with(['meter_area','meter_owner'])->where('id', $id)->first();
-         $readings = Meter::with(['meter_reading','meter_owner'])->where('id', $id)->first();
+         $readings = Reading::where('meter_id', $id)->get();
         return view('admin.meter.owner_show',compact('data','readings'));
     }
 

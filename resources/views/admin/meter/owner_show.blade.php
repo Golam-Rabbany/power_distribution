@@ -83,7 +83,7 @@
                             </tr>
                         </thead>
                         <tbody class="text-sm divide-y divide-gray-100">
-                            @foreach ($readings->meter_reading as $data)
+                            @foreach ($readings as $data)
                                 <tr>
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left">{{$data->date??''}}</div>
