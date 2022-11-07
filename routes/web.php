@@ -19,14 +19,14 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth'])->group(function () {
 
     Route::resource('/area', AreaController::class);
-    Route::resource('/owner', OwnerController::class);
-    Route::resource('/meter', MeterController::class);
+    Route::resource('/owner', OwnerController::class);    
+    Route::resource('/meter', MeterController::class);    
     Route::resource('/reading', ReadingController::class);
     Route::resource('/bill', BillController::class);
-
+ 
     Route::get('/generate_bill', [BillController::class, 'generate_bill'])->name('generate.bill');
     Route::get('/paybill', [BillController::class, 'paybill'])->name('paybill');
-    Route::get('/invoice', [BillController::class, 'invoice'])->name('invoice');
+    Route::get('/invoice/{id}', [BillController::class, 'invoice'])->name('invoice');
     
     Route::get('/getAreaMeterSection/{id}', [ReadingController::class, 'getAreaMeterSection'])->name('getAreaMeterSection');
     Route::get('/getAreaOwnerSection/{id}', [MeterController::class, 'getAreaOwnerSection'])->name('getAreaOwnerSection');

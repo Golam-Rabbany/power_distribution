@@ -8,33 +8,49 @@
             <h2 class="font-semibold text-gray-800">Bill Payment</h2>
         </header>
         <div class="p-3 w-full">
-            <form>
+            <form method="POST" action="{{route('bill.update',$detail->id)}}">
+              @csrf
+              @method('PUT')
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full md:w-1/2 px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                          Meter Id
+                          Meter Code
                         </label>
-                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text">
+                        <input value="{{$detail->meter_reading->meter_id}}" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text">
                       </div>
                   <div class="w-full md:w-1/2 px-3">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                       Meter User
                     </label>
-                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" >
+                    <input value="{{$detail->meter_owner->owner_name}}" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" >
                   </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full md:w-1/2 px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                          Meter NID
+                          User Phone
                         </label>
-                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text">
+                        <input value="0{{$detail->meter_owner->phone}}" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text">
                       </div>
                   <div class="w-full md:w-1/2 px-3">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                      Area 
+                      Use Unit
                     </label>
-                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" >
+                    <input value="{{$detail->unit}}" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" >
+                  </div>
+                </div>
+                <div class="flex flex-wrap -mx-3 mb-6">
+                  <div class="w-full md:w-1/2 px-3">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                      Net Total
+                    </label>
+                    <input value="{{$net_total =$detail->net_total}}" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" >
+                  </div>
+                  <div class="w-full md:w-1/2 px-3">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                      Payable
+                    </label>
+                    <input value="{{$detail->payable}}" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" >
                   </div>
                 </div>
                 <div class="flex justify-center">
@@ -42,7 +58,7 @@
                     <label class="block uppercase tracking-wide text-gray-700 text-2xl font-bold mb-2" for="grid-last-name">
                       Bill Payment
                     </label>
-                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="number" >
+                    <input name="payment" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="number" >
                   </div>
                 </div>
                 <div class="text-center w-full my-3 py-4">

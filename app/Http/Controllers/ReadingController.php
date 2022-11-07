@@ -40,17 +40,43 @@ class ReadingController extends Controller
         $data->area_id = $request->area_id;
         $data->meter_id = $request->meter_id;
         $data->bill_id = $request->meter_id;
-        $data->unit = $request->unit;
+        $data->unit = $request->unit - $last_reading;
         $data->date = $request->date;
-       
-        $data->save();
+        if($request->unit > 0 && $request->unit <=300){
+            $unit_amount = ($request->unit - $last_reading) * 5.70;
+        }elseif ($$request->unit >=301 && $request->unit <= 700){
+            $unit_amount = ($request->unit - $last_reading) * 8.35;
+        }elseif ($request->unit >=701 && $request->unit <= 20000){
+            $unit_amount = ($request->unit - $last_reading) * 15.10;
+        }
+        else{
+            $unit_amount = ($request->unit - $last_reading) * 0;
+        }
+        $data->unit_amount = $unit_amount;
+           
+        
        
        $meter= Meter::find($request->meter_id);
+
+       if ($meter->mether_type == 'personal'){
+        $vat = $unit_amount * 1.22 / 100;
+        }elseif ($meter->mether_type == 'business'){
+            $vat = $unit_amount * 3.40 / 100;
+        }elseif ($meter->mether_type == 'industrial'){
+            $vat = $unit_amount * 5.10 /100;
+        }else{
+            $vat = $unit_amount * 0;
+        }
+        $data->vat = $vat;
+        $data->net_total = $unit_amount + $vat;
+        $data->payable = $data->net_total;
+
+
 
        $meter->use_unit = $request->unit - $last_reading;
        $meter->update();
 
-       if ($meter->use_unit >0 && $meter->use_unit <= 300 ){
+       if ($meter->use_unit > 0 && $meter->use_unit <= 300 ){
             $unit_price = $meter->use_unit * 5.70;
        }elseif ($meter->use_unit >=301 && $meter->use_unit <= 700){
             $unit_price =$meter->use_unit * 8.35;
@@ -80,6 +106,8 @@ class ReadingController extends Controller
         $bills->vat = $vat;
         $bills->net_total = $unit_price + $vat;
 
+
+        $data->save();
         $bills->save();
 
         return back()->with('success', 'Added Successfully');

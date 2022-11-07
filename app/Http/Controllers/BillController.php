@@ -10,9 +10,17 @@ use Illuminate\Http\Request;
 class BillController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $datas = Bill::with('meter_bill')->get();
+     
+       if($request->from){
+        $datas = Reading::with('meter_reading')->whereBetween('date',[$request->start, $request->end])->get();
+       }else{
+        $datas = Reading::with('meter_reading')->get();
+       }
+         
+        
+
         return view('admin.bill.index',compact('datas'));
     }
 
@@ -34,7 +42,8 @@ class BillController extends Controller
 
     public function show($id)
     {
-        //
+         $detail = Reading::with(['meter_reading','meter_owner'])->where('id', $id)->first();
+        return view('admin.bill.pay_bill',compact('detail'));
     }
 
 
@@ -45,7 +54,11 @@ class BillController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $data = Reading::find($id);
+        $data->paid = $data->paid + $request->payment;
+        $data->payable = $data->payable - $request->payment;
+        $data->update();
+        return redirect(route('bill.index'));
     }
 
     public function destroy($id)
@@ -58,7 +71,7 @@ class BillController extends Controller
         // return $hello = Bill::where('meter_id',)
     //    return $datas = Reading::with('meter_bill')->where('')->whereBetween('created_at',[$request->start, $request->end])->get();
 
-        $datas = Reading::with(['reading_bill', 'meter_bill'])->whereBetween('created_at',[$request->start, $request->end])->get();
+    $datas = Reading::with(['reading_bill', 'meter_bill'])->whereBetween('date',[$request->start, $request->end])->get();
        return view('admin.bill.create',compact('datas'));
     }
 
@@ -71,9 +84,10 @@ class BillController extends Controller
     //  }
 
     public function paybill(){
-        return view('admin.bill.pay_bill');
+        
     }
-    public function invoice(){
-        return view('admin.bill.invoice');
+    public function invoice($id){
+         $invoice_data = Reading::with(['meter_reading', 'meter_owner'])->where('id', $id)->first();
+        return view('admin.bill.invoice',compact('invoice_data'));
     }
 }

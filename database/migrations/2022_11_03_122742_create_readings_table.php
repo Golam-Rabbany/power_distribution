@@ -19,6 +19,13 @@ return new class extends Migration
             $table->foreignId('meter_id')->constrained('meters')->onDelete('cascade');
             $table->foreignId('bill_id')->constrained('bills')->onDelete('cascade');
             $table->integer('unit');
+            $table->integer('unit_amount')->nullable();
+            $table->integer('vat')->nullable();
+            $table->integer('net_total')->nullable();
+            $table->integer('fine')->nullable();
+            $table->integer('discount')->nullable();
+            $table->integer('payable')->nullable();
+            $table->integer('paid')->nullable();
             $table->date('date');
             $table->timestamps();
         });
