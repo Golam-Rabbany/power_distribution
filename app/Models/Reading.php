@@ -13,8 +13,9 @@ class Reading extends Model
     return $this->hasOne(Meter::class, 'id', 'meter_id');
   }
   public function meter_owner(){
-    return $this->hasOne(Owner::class, 'id', 'meter_id');
+    return $this->hasone(Owner::class, 'id', 'meter_id');
   }
+
 
   public function meter_bill(){
     return $this->hasOne(Meter::class, 'id', 'meter_id');

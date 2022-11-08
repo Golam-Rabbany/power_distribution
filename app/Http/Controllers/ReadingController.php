@@ -44,7 +44,7 @@ class ReadingController extends Controller
         $data->date = $request->date;
         if($request->unit > 0 && $request->unit <=300){
             $unit_amount = ($request->unit - $last_reading) * 5.70;
-        }elseif ($$request->unit >=301 && $request->unit <= 700){
+        }elseif ($request->unit >=301 && $request->unit <= 700){
             $unit_amount = ($request->unit - $last_reading) * 8.35;
         }elseif ($request->unit >=701 && $request->unit <= 20000){
             $unit_amount = ($request->unit - $last_reading) * 15.10;

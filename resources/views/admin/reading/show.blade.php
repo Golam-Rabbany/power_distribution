@@ -64,7 +64,16 @@
                                     <div class="font-semibold text-left">Unit</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Created At</div>
+                                    <div class="font-semibold text-left">Net Total</div>
+                                </th>
+                                <th class="p-2 whitespace-nowrap">
+                                    <div class="font-semibold text-left">Payable</div>
+                                </th>
+                                <th class="p-2 whitespace-nowrap">
+                                  <div class="font-semibold text-left">Created At</div>
+                                </th>
+                                <th class="p-2 whitespace-nowrap">
+                                    <div class="font-semibold text-left">Status</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">Edit / Delete</div>
@@ -84,8 +93,23 @@
                                         <div class="text-left font-medium text-green-500">{{$data->unit??''}}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left font-medium text-green-500">{{$data->net_total??''}}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left font-medium text-green-500">{{$data->payable??''}}</div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
                                         <div class="text-left font-medium text-green-500">{{$data->created_at??''}}</div>
                                     </td>
+                                    @if ($data->net_total == $data->paid)
+                                    <td class="p-2 whitespace-nowrap">
+                                        <span class="bg-purple-700 text-white font-medium rounded-lg text-sm px-3 py-1 mb-2">paid</span>
+                                    </td>
+                                    @else
+                                    <td class="p-2 whitespace-nowrap">
+                                      <span class="bg-red-700 text-white font-medium rounded-lg text-sm px-3 py-1 mb-2">unpaid</span>
+                                  </td>
+                                    @endif
                                                                         
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left flex font-medium text-green-500"><a href="">
