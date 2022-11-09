@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('meter_id')->unique();
             $table->foreignId('area_id')->constrained('areas')->onDelete('cascade');
             $table->foreignId('owner_id')->constrained('owners')->onDelete('cascade');
-            $table->string('city');
-            $table->string('area');
-            $table->string('flat');
-            $table->string('post_code');
+            $table->string('city')->nullable();
+            $table->string('area')->nullable();
+            $table->string('flat')->nullable();
+            $table->string('post_code')->nullable();
             $table->integer('use_unit')->default(0);
             $table->timestamps();
         });

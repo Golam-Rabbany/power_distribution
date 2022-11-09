@@ -33,4 +33,7 @@ Route::middleware(['auth'])->group(function () {
     
 });
 
+
+Route::get('/role_permission', [MeterController::class, 'role_permission']);
+
 require __DIR__.'/auth.php';

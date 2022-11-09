@@ -12,15 +12,7 @@ class BillController extends Controller
 
     public function index(Request $request)
     {
-     
-       if($request->from){
         $datas = Reading::with('meter_reading')->whereBetween('date',[$request->start, $request->end])->get();
-       }else{
-        $datas = Reading::with('meter_reading')->get();
-       }
-         
-        
-
         return view('admin.bill.index',compact('datas'));
     }
 

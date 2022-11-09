@@ -9,10 +9,14 @@ use App\Models\Bill;
 use App\Models\Meter;
 use App\Models\Owner;
 use App\Models\Reading;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use function GuzzleHttp\Promise\all;
+use Spatie\Permission\Models\Permission;
 
 class MeterController extends Controller
 {
@@ -98,5 +102,14 @@ class MeterController extends Controller
 
     public function getAreaOwnerSection($id){
         return Owner::where('area_id', $id)->get();
+    }
+
+    public function role_permission(){
+        // $role = Role::create(['name' => 'worker']);
+        // $permission = Permission::create(['name' => 'worker']);
+        $permission = Permission::find(3);
+        // $roles = Role::find(3);
+        $user = User::find(3);
+        $user->assignRole($user);
     }
 }

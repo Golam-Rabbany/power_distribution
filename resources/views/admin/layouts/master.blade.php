@@ -36,7 +36,7 @@
             </div>
             <div class="flex flex-grow justify-center lg:order-1 lg:flex-grow-0">
                 <div class="max-w-56 p-2 text-center lg:w-56 lg:max-w-56">
-                    Laravel
+                   <a href="{{url('/')}}">Laravel</a> 
                 </div>
             </div>
             <div
@@ -99,7 +99,7 @@
           "
                 x-cloak x-bind:class="sidebarOpen ? '' : '-ml-56'">
                 <div class="w-full font-semibold">
-                    <a href="" class="flex items-center p-[.7rem] hover:text-sky-500">
+                    <a href="{{route('dashboard')}}" class="flex items-center p-[.7rem] hover:text-sky-500">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                             class="mr-1 h-5 w-5">
                             <path fill-rule="evenodd"
@@ -151,7 +151,9 @@
                     </a>
                     <div class="w-full overflow-hidden bg-sky-600" x-bind:class="submenuOpen ? 'h-auto' : 'h-0'">
                         <a href="{{route('meter.index')}}" class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-300"> View Meter</a>
+                        @can('author')
                         <a href="{{route('meter.create')}}" class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-300">Create Meter</a>
+                        @endcan
                     </div>
                 </div>
                 <div class="w-full font-semibold" x-data="{ submenuOpen: false }" x-on:active="submenuOpen = true"
@@ -177,6 +179,7 @@
                         <a href="{{route('reading.create')}}" class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-300">Create Reading</a>
                     </div>
                 </div>
+                @can('author')
                 <div class="w-full font-semibold">
                     <a href="{{route('generate.bill')}}" class="flex items-center p-[.7rem] hover:text-sky-500">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -188,6 +191,9 @@
                         <span>Generate Bill</span>
                     </a>
                 </div>
+                @endcan
+
+                @can('author')
                 <div class="w-full font-semibold" x-data="{ submenuOpen: false }" x-on:active="submenuOpen = true"
                     x-on:click.outside="submenuOpen = false">
                     <a href="#" x-on:click.prevent="submenuOpen = !submenuOpen"
@@ -207,11 +213,13 @@
                         </svg>
                     </a>
                     <div class="w-full overflow-hidden bg-sky-600" x-bind:class="submenuOpen ? 'h-auto' : 'h-0'">
-                        <a href="{{route('paybill')}}" class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-300">Bill Pay</a>
+                        
                         <a href="{{route('bill.index')}}" class="pl-8 block w-full cursor-pointer p-2 hover:text-sky-300">View Bill</a>
+                        
                     </div>
                 </div>
-
+                @endcan
+                
             </div>
             <div class="flex-grow transition-[margin] w-full overflow-auto" x-cloak
                 x-bind:class="sidebarOpen ? 'ml-56 overflow-hidden' : ''">

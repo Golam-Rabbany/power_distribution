@@ -2,6 +2,8 @@
 
 @section('dashboard')
 
+@can('worker')
+  
 <section class="antialiased bg-gray-100 text-gray-600 h-screen">
     <div class="flex justify-end pt-4 pr-3">
         <a href=""><p class="bg-sky-500 text-white px-3 py-2 font-semibold rounded-lg">Create Area</p></a>
@@ -118,4 +120,5 @@
     </div>
 </section>
 
+@endcan
 @endsection

@@ -5,6 +5,7 @@
 @endsection
 
 @section('dashboard')
+@can('worker')
 
 <section class="antialiased bg-gray-100 text-gray-600 h-screen">
     <div class="flex justify-end pt-6 pr-3">
@@ -106,4 +107,5 @@
 </script>
 @endsection
 
+@endcan
 @endsection

@@ -35,7 +35,7 @@ class ReadingController extends Controller
         ]);
 
         $last_reading = Reading::where('meter_id', $request->meter_id)->latest()->orderBy('id','DESC')->value('unit');
-
+ 
         $data = new Reading();
         $data->area_id = $request->area_id;
         $data->meter_id = $request->meter_id;
@@ -53,9 +53,8 @@ class ReadingController extends Controller
             $unit_amount = ($request->unit - $last_reading) * 0;
         }
         $data->unit_amount = $unit_amount;
-           
-        
-       
+
+
        $meter= Meter::find($request->meter_id);
 
        if ($meter->mether_type == 'personal'){

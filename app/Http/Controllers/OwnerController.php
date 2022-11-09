@@ -51,7 +51,8 @@ class OwnerController extends Controller
 
     public function show($id)
     {
-        return view('admin.owner.show');
+        $data = Owner::where('id', $id)->first();
+        return view('admin.owner.show',compact('data'));
     }
 
     public function edit($id)

@@ -1,6 +1,8 @@
 @extends('admin.layouts.master')
 
 @section('dashboard')
+@can('author')
+
 <div class="p-3">
   <div class="flex justify-end pt-4 pr-3">
     <a href="{{route('meter.index')}}"><p class="bg-sky-500 text-white px-3 py-2 font-semibold rounded-lg">Show Meter</p></a>
@@ -12,13 +14,13 @@
         </div>
     @endif
 
-    <form method="POST" action="{{route('meter.store')}}" enctype="multipart/form-data">
+    <form method="POST" action="{{route('meter.store')}}" enctype="multipart/form-data" id="myForm" onsubmit="return validForm()">
         @csrf
         <div class="mt-5">
         
         <div class="grid md:grid-cols-2 md:gap-6">
           <div class="relative z-0 mb-6 w-full group">
-            <select name="mether_type" id="" class="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+            <select name="mether_type" id="select" form="myForm" class="block py-2.5 px-2 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
                 <option value="">---select---</option>
                 <option value="personal">Personal</option>
                 <option value="business">Business</option>
@@ -102,8 +104,6 @@
     </form>
 </div>
 
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
@@ -134,5 +134,5 @@
   }
 </script>
 
-
+@endcan
 @endsection

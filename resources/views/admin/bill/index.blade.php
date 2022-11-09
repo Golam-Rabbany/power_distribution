@@ -6,6 +6,8 @@
 
 @section('dashboard')
 
+@can('author')
+    
 <div>   
     <form action="{{route('bill.index')}}" method="get" >
         <div class="flex justify-center px-3 py-4">
@@ -58,7 +60,7 @@
                         <div class="font-semibold text-center">Payment System</div>
                     </th>
                     <th class="p-2 whitespace-nowrap">
-                        <div class="font-semibold text-center">Created Date</div>
+                        <div class="font-semibold text-center">Date</div>
                     </th>
                 </tr>
             </thead>
@@ -111,7 +113,7 @@
                         @endif
                         
                         <td class="p-2 whitespace-nowrap">
-                            <div class="text-lg text-center">{{$bill->created_at}}</div>
+                            <div class="text-lg text-center">{{$bill->date}}</div>
                         </td>
                     </tr>
                 @endforeach
@@ -121,6 +123,7 @@
     </div>
 </div>
 
+@endcan
 
 @section('data_table_js')
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

@@ -70,7 +70,7 @@
                                     <div class="font-semibold text-left">Payable</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
-                                  <div class="font-semibold text-left">Created At</div>
+                                  <div class="font-semibold text-left">Date</div>
                                 </th>
                                 <th class="p-2 whitespace-nowrap">
                                     <div class="font-semibold text-left">Status</div>
@@ -99,7 +99,7 @@
                                         <div class="text-left font-medium text-green-500">{{$data->payable??''}}</div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left font-medium text-green-500">{{$data->created_at??''}}</div>
+                                        <div class="text-left font-medium text-green-500">{{$data->updated_at??''}}</div>
                                     </td>
                                     @if ($data->net_total == $data->paid)
                                     <td class="p-2 whitespace-nowrap">

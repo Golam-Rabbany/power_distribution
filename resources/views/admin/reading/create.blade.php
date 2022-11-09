@@ -1,6 +1,8 @@
 @extends('admin.layouts.master')
 
 @section('dashboard')
+@can('worker')
+ 
 <div class="p-3">
 
   <div class="flex justify-end pt-6 pr-3">
@@ -56,6 +58,17 @@
           </div>
           
         </div>
+        <div class="grid md:grid-cols-2 md:gap-6">
+          
+          <div class="relative z-0 mb-6 w-full group">
+              <input type="date" name="last_date"  class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required="">
+              <label for="last_date" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last Date</label>
+              @error('last_date')
+                <div class="text-red-600 text-sm">{{ $message }}</div>
+              @enderror
+          </div>
+          
+        </div>
 
         
 
@@ -68,9 +81,6 @@
         </div>
     </form>
 </div>
-
-
-
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -99,6 +109,7 @@
     {{-- @section('jquery')
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @endsection --}}
-
+ 
+  @endcan
 
 @endsection

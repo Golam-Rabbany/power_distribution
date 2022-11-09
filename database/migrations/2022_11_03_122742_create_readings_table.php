@@ -27,6 +27,7 @@ return new class extends Migration
             $table->integer('payable')->nullable();
             $table->integer('paid')->nullable();
             $table->date('date');
+            $table->date('last_date');
             $table->timestamps();
         });
     }
